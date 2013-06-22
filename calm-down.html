@@ -29,7 +29,7 @@
 		}
 
 		#paste, 
-		p#exclamation-points-count {
+		p#report {
 			padding-top: 18px;
 		}
 
@@ -56,7 +56,7 @@
 		<h3 id="paste">Paste your text:</h3>
 		<textarea id="text-area"></textarea>
 
-		<p id="exclamation-points-count"></p>
+		<p id="report"></p>
 	</div>
 
 	<footer>
@@ -76,7 +76,7 @@
 	          else {
 	          	var pointOrPoints = 'points';
 	          }
-	          $('#exclamation-points-count').text("That's " + numberOfExclamationPoints + ' exclamation ' + pointOrPoints + '.');
+	          $('#report').text("That's " + numberOfExclamationPoints + ' exclamation ' + pointOrPoints + '.');
 	    });
 	})();
 
