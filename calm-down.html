@@ -13,10 +13,12 @@
 
 		h1, h2, h3, p {
 			color: #fff;
+			font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 		}
 
 		h1 {
 			font-size: 2.8em;
+			margin-bottom: 10px;
 		}
 
 		a {
@@ -28,15 +30,35 @@
 			margin: auto;
 		}
 
+		label {
+			color: #363636;
+		}
+
 		#paste, 
 		p#report {
-			padding-top: 18px;
+			padding-top: 12px;
+		}
+
+		p#report {
+			font-size: 1.2em;
+		}
+
+		input {
+			max-width: 30px;
+			margin-left: 8px;
+			margin-right: 8px;
 		}
 
 		textarea {
 			width: 80%;
 			height: 200px;
 			margin: auto;
+		}
+
+		.error,
+		.too-many {
+			color: #C11B17;
+			font-weight: bold;
 		}
 
 		footer {
@@ -53,10 +75,14 @@
 		<h1>calm down.</h1>
 		<h2>(a tool to help you mind your exclamation points)</h2>
 
+		<label>How many is too many?</label>
+		<input name="limit" id="limit" />
+		<span class="error"></span>
+
 		<h3 id="paste">Paste your text:</h3>
 		<textarea id="text-area"></textarea>
 
-		<p id="report"></p>
+		<p id="report"><span id="number"></span></p>
 	</div>
 
 	<footer>
@@ -67,16 +93,31 @@
 
 <script>
 	(function() {
+		var limit = 0;
+
+	    $('#limit').keyup(function() {
+	    	limit = $(this).val();
+
+	    	if (!$.isNumeric(limit)) {
+	    		$('.error').text('Please enter a valid integer.');
+	    	}
+	    	else {
+	    		$('.error').text('');
+	    	}
+	    });
+
 	    $('#text-area').keyup(function() {
-	          var exclamationPoints = $(this).val().match(/!/ig) || [];
-	          var numberOfExclamationPoints = exclamationPoints.length;
-	          if (numberOfExclamationPoints == 1) {
-	          	var pointOrPoints = 'point';
-	          }
-	          else {
-	          	var pointOrPoints = 'points';
-	          }
-	          $('#report').text("That's " + numberOfExclamationPoints + ' exclamation ' + pointOrPoints + '.');
+          var exclamationPoints = $(this).val().match(/!/ig) || [];
+          var numberOfExclamationPoints = exclamationPoints.length;
+          if (numberOfExclamationPoints == 1) {
+          	var pointOrPoints = 'point';
+          }
+          else {
+          	var pointOrPoints = 'points';
+          }
+          $('#report').text("That's " + numberOfExclamationPoints + ' exclamation ' + pointOrPoints + '.');
+
+		$('#report').toggleClass('too-many', ($.isNumeric(limit) && (numberOfExclamationPoints >= limit)));
 	    });
 	})();
 
