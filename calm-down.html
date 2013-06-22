@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>calm down.</title>
+
+	<style>
+		body {
+			text-align: center;
+			font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+			background-color: #5DBCD2;
+		}
+
+		h1, h2, h3, p {
+			color: #fff;
+		}
+
+		h1 {
+			font-size: 2.8em;
+		}
+
+		a {
+			color: #e3e3e3;
+		}
+
+		#content {
+			width: 600px;
+			margin: auto;
+		}
+
+		#paste, 
+		p#exclamation-points-count {
+			padding-top: 18px;
+		}
+
+		textarea {
+			width: 80%;
+			height: 200px;
+			margin: auto;
+		}
+
+		footer {
+			position: absolute;
+			bottom: 2%;
+			right: 2%;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div id ="content">
+		<h1>calm down.</h1>
+		<h2>(a tool to help you mind your exclamation points)</h2>
+
+		<h3 id="paste">Paste your text:</h3>
+		<textarea id="text-area"></textarea>
+
+		<p id="exclamation-points-count"></p>
+	</div>
+
+	<footer>
+		<p>by <a href="http://www.fureigh.com">fureigh</a>.</p>
+	</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+	(function() {
+	    $('#text-area').keyup(function() {
+	          var exclamationPoints = $(this).val().match(/!/ig) || [];
+	          var numberOfExclamationPoints = exclamationPoints.length;
+	          if (numberOfExclamationPoints == 1) {
+	          	var pointOrPoints = 'point';
+	          }
+	          else {
+	          	var pointOrPoints = 'points';
+	          }
+	          $('#exclamation-points-count').text("That's " + numberOfExclamationPoints + ' exclamation ' + pointOrPoints + '.');
+	    });
+	})();
+
+</script>
+
+</body>
+</html>
